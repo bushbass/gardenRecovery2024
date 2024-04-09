@@ -1,11 +1,11 @@
 const express = require('express');
 const {
+    resetAllQuantities,
     getProducts,
     getProduct,
     createProduct,
     deleteProduct,
     updateProduct,
-    resetAllQuantities,
 } = require('../controllers/productController');
 
 const router = express.Router();

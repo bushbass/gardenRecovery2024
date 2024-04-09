@@ -1,6 +1,16 @@
 const Product = require('../models/productModel');
 const mongoose = require('mongoose');
 
+
+// set all products quatity to 0
+const resetAllQuantities = async (req, res) => {
+    const result = await Product.updateMany(
+        { quantity: { $gt: 0 } },
+        { quantity: 0 }
+    );
+    res.send(result);
+};
+
 // get all products
 const getProducts = async (req, res) => {
     const products = await Product.find({}).sort({ createdAt: 1 });
@@ -101,20 +111,12 @@ const updateProduct = async (req, res) => {
     res.status(200).json(product);
 };
 
-// set all products quatity to 0
-const resetAllQuantities = async (req, res) => {
-    const result = await Product.updateMany(
-        { quantity: { $gt: 0 } },
-        { quantity: 0 }
-    );
-    res.send(result);
-};
 
 module.exports = {
+    resetAllQuantities,
     getProducts,
     getProduct,
     createProduct,
     deleteProduct,
     updateProduct,
-    resetAllQuantities,
 };
