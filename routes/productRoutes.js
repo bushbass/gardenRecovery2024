@@ -10,6 +10,8 @@ const {
 
 const router = express.Router();
 
+// update RESET all quantities to zero
+router.get('/reset', resetAllQuantities);
 
 // get all products
 router.get('/', getProducts);
@@ -26,7 +28,5 @@ router.delete('/:id', deleteProduct);
 // UPDATE a product
 router.put('/:id', updateProduct);
 
-// update RESET all quantities to zero
-router.get('/reset', resetAllQuantities);
 
 module.exports = router;
