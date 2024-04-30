@@ -13,9 +13,15 @@ const resetAllQuantities = async (req, res) => {
 
 // get all products
 const getProducts = async (req, res) => {
-    const products = await Product.find({}).sort({ createdAt: 1 });
+    const products = await Product.find({}).sort({ aisle: 1, bay: 1 });
     res.status(200).json(products);
 };
+
+// get only needed products
+const getNeeded = async (req, res) => {
+    const products = await Product.find({ quantity: { $gt: 0 } }).sort(({ bay: 1 }))
+    res.status(200).json(products)
+}
 
 // get a single product
 const getProduct = async (req, res) => {
@@ -34,7 +40,7 @@ const getProduct = async (req, res) => {
 
 // create a new product
 const createProduct = async (req, res) => {
-    const { title, category, quantity, bay, sku } = req.body;
+    const { title, category, quantity, aisle, bay, sku } = req.body;
 
     const emptyFields = [];
     if (!title) {
@@ -45,6 +51,9 @@ const createProduct = async (req, res) => {
     }
     if (!quantity) {
         emptyFields.push('quantity');
+    }
+    if (!aisle) {
+        emptyFields.push('aisle');
     }
     if (!bay) {
         emptyFields.push('bay');
@@ -63,6 +72,7 @@ const createProduct = async (req, res) => {
             title,
             category,
             quantity,
+            aisle,
             bay,
             sku,
         });
@@ -116,6 +126,7 @@ module.exports = {
     resetAllQuantities,
     getProducts,
     getProduct,
+    getNeeded,
     createProduct,
     deleteProduct,
     updateProduct,

@@ -3,6 +3,7 @@ const {
     resetAllQuantities,
     getProducts,
     getProduct,
+    getNeeded,
     createProduct,
     deleteProduct,
     updateProduct,
@@ -15,6 +16,9 @@ router.get('/reset', resetAllQuantities);
 
 // get all products
 router.get('/', getProducts);
+
+// get only needed products
+router.get('/needed', getNeeded)
 
 // get one product
 router.get('/:id', getProduct);

@@ -17,6 +17,10 @@ const productSchema = new Schema(
             type: Number,
             required: true,
         },
+        aisle: {
+            type: String,
+            required: true,
+        },
         bay: {
             type: String,
             required: true,
